@@ -11,6 +11,12 @@ export default class index extends Component {
                 color: red
             }
         `}</style>
+
+        <style jsx global>{`
+            body {
+                background-color: yellow
+            }
+        `}</style>
       </div>
     )
   }
