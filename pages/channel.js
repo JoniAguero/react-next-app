@@ -11,14 +11,13 @@ export default class extends React.Component {
             fetch(`https://api.audioboom.com/channels/${idChannel}/audio_clips`)
         ])
 
-        let [dataChannel, dataSeries, dataAudios] = await Promise.all([
-            reqChannel.json(),
-            reqSeries.json(),
-            reqAudios.json()
-        ])
-
+        let dataChannel = await reqChannel.json()
         let channel = dataChannel.body.channel
+
+        let dataAudios = await reqAudios.json()
         let audioClips = dataAudios.body.audio_clips
+
+        let dataSeries = await reqSeries.json()
         let series = dataSeries.body.channels
 
         return { channel, audioClips, series }
@@ -52,7 +51,14 @@ export default class extends React.Component {
 
             <h2>Ultimos Podcasts</h2>
             {audioClips.map((clip) => (
-                <div className="podcast" key={clip.id}>{clip.title}</div>
+                <Link href={`/podcast?id=${clip.id}`} prefetch key={clip.id}>
+                    <a className='podcast'>
+                        <h3>{clip.title}</h3>
+                        <div className='meta'>
+                            {Math.ceil(clip.duration / 60)} minutes
+                        </div>
+                    </a>
+                </Link>
             ))}
 
 
