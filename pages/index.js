@@ -6,6 +6,8 @@ export default class index extends Component {
       <div>
         <h1>¡Hola mundo!</h1>
 
+        <img src="/static/platzi-logo.png" alt="Logo Platzi" />
+
         <style jsx>{`
             h1 {
                 color: red
